@@ -107,7 +107,6 @@ Once the API is launched use Postman (or similar software) to make your POST and
 <img src="postman-get.png" >
 <img src="postman-post.png">
 
-[[postman screenshot screenshot][postman-screenshot-post]]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
