@@ -90,7 +90,7 @@ To launch the API you can either launch it via STS as SpringBootApp.
 
 Or
 
-Using the terminal go to the project directory enter the directory then use the command  ```mvn package``` , once the executable is built it should have been placed in the "target" directory. Use the command ```java -jar target/nameOfExecutable-Snapchot.jar
+Using the terminal go to the project directory enter the directory then use the command  ```mvn package``` , once the executable is built it should have been placed in the "target" directory. Use the command ```java -jar target/nameOfExecutable-Snapchot.jar```
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
