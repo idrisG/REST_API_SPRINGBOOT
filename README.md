@@ -40,7 +40,9 @@
 ## About The Project
 
 Here is an exemple of what the API does when using the display user service. : 
-[[postman screenshot screenshot][postman-screenshot-get]]
+
+<img src="/idrisG/test_offer/blob/main/postman-get.png" alt="Logo" width="80" height="80">
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -102,16 +104,10 @@ Using the terminal go to the project directory enter the directory then use the 
 
 Once the API is launched use Postman (or similar software) to make your POST and GET requests (POST request uri : localhost:8080/createUser ; GET request uri : localhost:8080/getUser/$username)
 
-[[postman screenshot screenshot][postman-screenshot-get]]
+<img src="/idrisG/test_offer/blob/main/postman-get.png" alt="Logo" width="80" height="80">
+<img src="/idrisG/test_offer/blob/main/postman-post.png" alt="Logo" width="80" height="80">
 
 [[postman screenshot screenshot][postman-screenshot-post]]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[postman-screenshot-get]: https://github.com/idrisG/test_offer/blob/main/postman-get.png
-[postman-screenshot-post]: https://github.com/idrisG/test_offer/blob/main/postman-post.png
