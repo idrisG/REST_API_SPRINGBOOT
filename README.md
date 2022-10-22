@@ -41,7 +41,7 @@
 
 Here is an exemple of what the API does when using the display user service. : 
 
-<img src="postman-get.png" alt="Logo" width="80" height="80">
+<img src="postman-get.png">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -104,8 +104,8 @@ Using the terminal go to the project directory enter the directory then use the 
 
 Once the API is launched use Postman (or similar software) to make your POST and GET requests (POST request uri : localhost:8080/createUser ; GET request uri : localhost:8080/getUser/$username)
 
-<img src="postman-get.png" alt="Logo" width="80" height="80">
-<img src="postman-post.png" alt="Logo" width="80" height="80">
+<img src="postman-get.png" >
+<img src="postman-post.png">
 
 [[postman screenshot screenshot][postman-screenshot-post]]
 
