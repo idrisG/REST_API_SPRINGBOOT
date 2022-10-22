@@ -113,5 +113,5 @@ Once the API is launched use Postman (or similar software) to make your POST and
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[postman-screenshot-get]: images/postman-get.png
-[postman-screenshot-post]: images/postman-post.png
+[postman-screenshot-get]: postman-get.png
+[postman-screenshot-post]: postman-post.png
