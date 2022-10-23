@@ -31,6 +31,10 @@ public class UserController {
 	
 	private UserService userService;
 	
+	/**
+	 * Constructor
+	 * @param userService
+	 */
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -48,7 +52,6 @@ public class UserController {
 	 * and user.username isn't already used
 	 * @param user
 	 * @param bindingResult
-	 * @param request
 	 * @return
 	 * @throw UserFormException
 	 */
@@ -68,10 +71,7 @@ public class UserController {
 	/**
 	 * Retrieve user information using the path variable username if
 	 * the username is found in database
-	 * @param modelAndView
 	 * @param username
-	 * @param bindingResult
-	 * @param request
 	 * @return
 	 * @throw ResponseStatusException
 	 */
