@@ -16,7 +16,7 @@ import com.example.userApp.model.User;
  *
  */
 public class UserValidator implements Validator {
-	//Date time Formater : dd/MM/yyyy
+	//Date time Formater : dd/MM/yyyy if used in more than one class put in a static class
 	private final DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
 
 	@Override
@@ -41,7 +41,7 @@ public class UserValidator implements Validator {
 	/**
 	 * Username inputs is alpha-numeric (allowing under score)
 	 * @param username
-	 * @return true if alpha-numeric
+	 * @return true if alpha-numeric or null (null already checked in the model)
 	 */
 	private boolean validFormatUsername(String username) {
 		if(username!=null) return username.matches("[a-zA-Z0-9_]*");
@@ -63,13 +63,12 @@ public class UserValidator implements Validator {
 		return true;
 	}
 	/**
-	 * Phonenumber inputs matches specific format
+	 * PhoneNumber inputs matches specific format
 	 * @param phoneNumber
 	 * @return true if no phonenumber or phonenumber matches specific formats
 	 */
 	private boolean matchPhoneNumber(String phoneNumber) {
-		if(phoneNumber!=null && phoneNumber.length()>20) return false;
-		if(phoneNumber==null || "".equals(phoneNumber) || phoneNumber.replaceAll("\\s", "").equals("")) { 
+		if(phoneNumber==null || "".equals(phoneNumber) || phoneNumber.trim().equals("")) { 
 			return true;
 		}
 		return phoneNumber.matches("\\d{10}") 

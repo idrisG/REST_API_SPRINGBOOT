@@ -68,7 +68,7 @@ class UserControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void testCreateUser() throws Exception {
+	void testCreateUser_success() throws Exception {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
 				.post("/createUser")
 				.accept(MediaType.APPLICATION_JSON).content(exampleUserJson)
@@ -84,7 +84,7 @@ class UserControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void testCreateUser_invalidUser() throws Exception {
+	void testCreateUser_failureInvalidUser() throws Exception {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
 				.post("/createUser")
 				.accept(MediaType.APPLICATION_JSON).content(exampleInvalidUserJson)
@@ -100,7 +100,7 @@ class UserControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void testCreateUser_voidUser() throws Exception {
+	void testCreateUser_failureVoidUser() throws Exception {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
 				.post("/createUser")
 				.accept(MediaType.APPLICATION_JSON).content(exampleVoidUserJson)
@@ -116,7 +116,7 @@ class UserControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void testRetireveUser() throws Exception {
+	void testRetireveUser_success() throws Exception {
 		Mockito.when(userService.findByUsername(user.getUsername())).thenReturn(user);
 	    mvc.perform(MockMvcRequestBuilders
 	            .get("/getUser/"+user.getUsername())
@@ -131,7 +131,7 @@ class UserControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void testRetireveUser_invalidUser() throws Exception {
+	void testRetireveUser_failureInvalidUser() throws Exception {
 		Mockito.when(userService.findByUsername(user.getUsername())).thenReturn(user);
 	    mvc.perform(MockMvcRequestBuilders
 	            .get("/getUser/wrongUser")

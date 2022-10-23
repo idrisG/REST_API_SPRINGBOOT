@@ -40,8 +40,10 @@ public class User implements Serializable{
 	@NotBlank(message = "Country of residence cannot be blank ! ")
 	private String country;
 
+	@Size(max=20, message = "Phone number cannot have more than 20 character ! ")
 	private String phoneNumber;  
 	
+	@Size(max=6, message = "Gender cannot have more than 6 character ! ")
 	private String gender;  
 
 	/**
