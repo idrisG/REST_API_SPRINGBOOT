@@ -31,6 +31,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#error-that-might-occur">Error that might occur</a></li>
   </ol>
 </details>
 
@@ -118,3 +119,4 @@ If you are building the jar executable using maven, an error might occur :
 
 To correct this error look at the version of lombok in the pom.xml, it should be ```<lombok.version>1.18.20</lombok.version>``` (When doing maven clean, the version might automatically change to : 1.18.2)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
