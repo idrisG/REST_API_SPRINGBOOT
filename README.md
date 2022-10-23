@@ -92,7 +92,7 @@ To launch the API you can either launch it via STS as SpringBootApp.
 
 Or
 
-Using the terminal go to the project directory enter the directory then use the command  ```mvn package``` , once the executable is built it should have been placed in the "target" directory. Use the command ```java -jar target/nameOfExecutable-Snapchot.jar```
+Using the terminal go to the project directory enter the directory (where the pom.xml file is) then use the command  ```mvn package``` , once the executable is built it should have been placed in the "target" directory. Use the command ```java -jar target/nameOfExecutable-Snapshot.jar```
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -107,6 +107,6 @@ Once the API is launched use Postman (or similar software) to make your POST and
 <img src="postman-get.png" >
 <img src="postman-post.png">
 
-
+(The API uses deffault error message if the request method is wrong or the url is wrong)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
