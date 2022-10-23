@@ -22,7 +22,7 @@ import com.example.userApp.service.UserService;
 import com.example.userApp.validator.UserValidator;
 
 /**
- * Rest controller of our api
+ * Rest controller of our API
  * @author idris
  *
  */

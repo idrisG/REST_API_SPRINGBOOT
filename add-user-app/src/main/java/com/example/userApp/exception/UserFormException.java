@@ -11,7 +11,6 @@ import org.springframework.web.server.ResponseStatusException;
  * @author idris
  *
  */
-//TODO create Util class with public static messageFromBindingResult to use directly in controller
 public class UserFormException extends ResponseStatusException {
 
 	private static final long serialVersionUID = 5579571395494894023L;
@@ -24,7 +23,7 @@ public class UserFormException extends ResponseStatusException {
 		super(badRequest,messageFromBindingResult(result));
 	}
 	/**
-	 * Message stored in bindingResult errros
+	 * Message stored in bindingResult errors
 	 * @param result binding result
 	 * @return message
 	 */

@@ -15,6 +15,10 @@ public class UserService {
 
 	private UserRepository userRepository;
 	
+	/**
+	 * Constructor
+	 * @param userRepository
+	 */
 	@Autowired
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -30,11 +34,10 @@ public class UserService {
 	/**
 	 * Save user in database
 	 * @param user
-	 * @return user
+	 * @return saved user
 	 */
 	public User createUser(User user) {
-		userRepository.save(user);
-		return user;
+		return userRepository.save(user);
 	}
 	
 }

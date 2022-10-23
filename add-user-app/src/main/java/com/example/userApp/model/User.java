@@ -21,6 +21,11 @@ import lombok.Data;
 @Table(name = "users")
 @Data
 public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8268187804307724173L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -39,9 +44,20 @@ public class User implements Serializable{
 	
 	private String gender;  
 
+	/**
+	 * Default constructor
+	 */
 	public User() {
 		
 	}
+	/**
+	 * Constructor
+	 * @param username
+	 * @param birthdate
+	 * @param country
+	 * @param phoneNumber
+	 * @param gender
+	 */
 	public User(String username, String birthdate, String country, String phoneNumber, String gender) {
 		this.username = username;
 		this.birthdate = birthdate;
@@ -87,6 +103,9 @@ public class User implements Serializable{
 	public String getUsername() {
 		return username;
 	}
+	/**
+	 * toString (to display in the console log)
+	 */
 	public String toString() {
 		String s =" User { Username : "+getUsername()+
 				" ; Birthdate :  "+getBirthdate()+

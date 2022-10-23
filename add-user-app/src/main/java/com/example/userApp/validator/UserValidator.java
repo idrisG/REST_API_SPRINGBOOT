@@ -16,6 +16,7 @@ import com.example.userApp.model.User;
  *
  */
 public class UserValidator implements Validator {
+	//Date time Formater : dd/MM/yyyy
 	private final DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
 
 	@Override
@@ -23,7 +24,7 @@ public class UserValidator implements Validator {
         return User.class.equals(clazz);
     }
 	/**
-	 * Method that validate User (form)
+	 * Method that validate User (form) and stores errors if User invalid
 	 */
 	@Override
 	public void validate(Object target, Errors errors) {
@@ -37,7 +38,11 @@ public class UserValidator implements Validator {
 		}
 		if(!isGender(user.getGender())) errors.rejectValue("gender", "gender.incorrect","Correct genders are Male or Female ! ");
 	}
-	
+	/**
+	 * Username inputs is alpha-numeric (allowing under score)
+	 * @param username
+	 * @return true if alpha-numeric
+	 */
 	private boolean validFormatUsername(String username) {
 		if(username!=null) return username.matches("[a-zA-Z0-9_]*");
 		return true;
