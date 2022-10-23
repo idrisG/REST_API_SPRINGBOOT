@@ -110,3 +110,11 @@ Once the API is launched use Postman (or similar software) to make your POST and
 (The API uses deffault error message if the request method is wrong or the url is wrong)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Error that might occur
+
+If you are building the jar executable using maven, an error might occur : 
+
+```Unable to make field private maven com.sun.tools.javac.processing ....```
+
+To correct this error look at the version of lombok in the pom.xml, it should be ```<lombok.version>1.18.20</lombok.version>``` (When doing maven clean, the version might automatically change to : 1.18.2)
+
