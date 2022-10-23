@@ -103,7 +103,9 @@ Using the terminal go to the project directory enter the directory (where the po
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once the API is launched use Postman (or similar software) to make your POST and GET requests (POST request uri : localhost:8080/createUser ; GET request uri : localhost:8080/getUser/$username)
+Once the API is launched use Postman (or similar software) to make your POST and GET requests (POST request url : localhost:8080/createUser ; GET request url : localhost:8080/getUser/$username)
+
+You can find a Postman collection in the git repository.
 
 <img src="postman-get.png" >
 <img src="postman-post.png">
