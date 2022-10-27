@@ -8,6 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Annotation used to specify the logging of inputs, outputs, timeElapsed.
+ * 
  * @author idris
  *
  */
