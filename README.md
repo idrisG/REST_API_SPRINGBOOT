@@ -39,6 +39,12 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+Once you launch the Application :
+
+You can find openAPI doc at http://localhost:8080/v3/api-docs
+
+You can find swagger at http://localhost:8080/swagger-ui.html
+
 
 Here is an exemple of what the API does when using the display user service. : 
 
