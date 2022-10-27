@@ -48,7 +48,7 @@ You can find swagger at http://localhost:8080/swagger-ui.html
 
 Here is an exemple of what the API does when using the display user service. : 
 
-<img src="postman-get.png">
+<img src="get-request.png">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -113,8 +113,8 @@ Once the API is launched use Postman (or similar software) to make your POST and
 
 You can find a Postman collection in the git repository.
 
-<img src="postman-get.png" >
-<img src="postman-post.png">
+<img src="get-request.png" >
+<img src="post-request.png">
 
 (The API uses deffault error message if the request method is wrong or the url is wrong)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
