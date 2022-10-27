@@ -39,12 +39,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Once you launch the Application :
-
-You can find openAPI doc at http://localhost:8080/v3/api-docs
-
-You can find swagger at http://localhost:8080/swagger-ui.html
-
 
 Here is an exemple of what the API does when using the display user service. : 
 
@@ -109,7 +103,14 @@ Using the terminal go to the project directory enter the directory (where the po
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once the API is launched use Postman (or similar software) to make your POST and GET requests (POST request url : localhost:8080/createUser ; GET request url : localhost:8080/getUser/$username)
+Once you launch the Application you can either use postman or swagger :
+
+You can find openAPI doc at http://localhost:8080/v3/api-docs
+
+You can find swagger at http://localhost:8080/swagger-ui.html
+
+
+Use Postman (or similar software) to make your POST and GET requests (POST request url : localhost:8080/users ; GET request url : localhost:8080/users/$id)
 
 You can find a Postman collection in the git repository.
 
