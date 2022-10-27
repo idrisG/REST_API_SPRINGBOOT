@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "60a6d74e-1aaf-4515-9121-b10a0d1760ac",
+		"name": "test offer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23977290"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"hubert\",\r\n    \"birthdate\": \"1996-01-01\",\r\n    \"country\":\"France\",\r\n    \"phoneNumber\":\"0102030405\",\r\n    \"gender\":\"MALE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				},
+				"description": "Body of post request to create new user"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/users/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1"
+					]
+				},
+				"description": "Get request to retrieve user : hubert"
+			},
+			"response": []
+		}
+	]
+}
