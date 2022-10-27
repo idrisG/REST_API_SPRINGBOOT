@@ -110,7 +110,7 @@ You can find openAPI doc at http://localhost:8080/v3/api-docs
 You can find swagger at http://localhost:8080/swagger-ui.html
 
 
-Use Postman (or similar software) to make your POST and GET requests (POST request url : localhost:8080/users ; GET request url : localhost:8080/users/$id)
+You can use Postman to make your POST and GET requests (POST request url : localhost:8080/users ; GET request url : localhost:8080/users/$id)
 
 You can find a Postman collection in the git repository.
 
