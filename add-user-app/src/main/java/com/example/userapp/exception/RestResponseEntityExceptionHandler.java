@@ -15,12 +15,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     protected ResponseEntity<ErrorMessage> handleConflictGetParam(RuntimeException ex, WebRequest request) {
         String messageContent = "Get method takes numeric value as path variable \n";
-        ErrorMessage message = new ErrorMessage(
-                Instant.now(),
-                HttpStatus.BAD_REQUEST.value(),
-                HttpStatus.BAD_REQUEST,
-                messageContent+ex.getMessage(),
-                request.getDescription(false));
-        return new ResponseEntity<ErrorMessage>(message,HttpStatus.BAD_REQUEST);
+        ErrorMessage message = new ErrorMessage(Instant.now(), HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST,
+                messageContent + ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.BAD_REQUEST);
     }
 }

@@ -35,6 +35,7 @@ import com.example.userapp.validator.UserValidator;
 
 /**
  * Unit test class for controller with JSON form request and response
+ * 
  * @author idris
  *
  */
@@ -44,97 +45,84 @@ import com.example.userapp.validator.UserValidator;
 @WithMockUser
 @TestMethodOrder(OrderAnnotation.class)
 class UserControllerTest {
-	
-	@Autowired
-	private MockMvc mvc;
-	
-	@MockBean
-	private UserService userService;
-	
-	UserDTO userDTO = new UserDTO("hubert",LocalDate.of(1996, 01, 01),"France","0102030405",Gender.MALE);
 
-	String exampleUserJson = "{\r\n"
-			+ "    \"username\": \"hubert\",\r\n"
-			+ "    \"birthdate\": \"1996-01-01\",\r\n"
-			+ "    \"country\":\"France\",\r\n"
-			+ "    \"phoneNumber\":\"0102030405\",\r\n"
-			+ "    \"gender\":\"MALE\"\r\n"
-			+ "}";	
-	
-	String exampleInvalidUserJson = "{\r\n"
-			+ "    \"username\": \"\",\r\n"
-			+ "    \"birthdate\": \"1996-01-01\",\r\n"
-			+ "    \"country\":\"France\",\r\n"
-			+ "    \"phoneNumber\":\"0102030405\",\r\n"
-			+ "    \"gender\":\"male\"\r\n"
-			+ "}";	
-	
-	String exampleVoidUserJson = "{}";	
-	
-	/**
-	 * JUnit test for creating User, POST request.
-	 * @throws Exception
-	 */
-	@Test
-	@Rollback(false)
-	@Order(1)
-	void testCreateUser_success() throws Exception {
-		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.post("/users")
-				.accept(MediaType.APPLICATION_JSON).content(exampleUserJson)
-				.contentType(MediaType.APPLICATION_JSON);
-		
-		MvcResult result = mvc.perform(requestBuilder).andReturn();
-		MockHttpServletResponse response = result.getResponse();
-		assertEquals(HttpStatus.CREATED.value(),response.getStatus());		
-	}
-	
-	/**
-	 * JUnit test for creating Invalid User, POST request
-	 * @throws Exception
-	 */
-	@Test
-	void testCreateUser_failureInvalidUser() throws Exception {
-		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.post("/users")
-				.accept(MediaType.APPLICATION_JSON).content(exampleInvalidUserJson)
-				.contentType(MediaType.APPLICATION_JSON);
-		
-		MvcResult result = mvc.perform(requestBuilder).andReturn();
-		MockHttpServletResponse response = result.getResponse();
-		assertEquals(HttpStatus.BAD_REQUEST.value(),response.getStatus());		
-	}
-	
-	/**
-	 * JUnit test for creating void User, POST request.
-	 * @throws Exception
-	 */
-	@Test
-	void testCreateUser_failureVoidUser() throws Exception {
-		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.post("/users")
-				.accept(MediaType.APPLICATION_JSON).content(exampleVoidUserJson)
-				.contentType(MediaType.APPLICATION_JSON);
-		
-		MvcResult result = mvc.perform(requestBuilder).andReturn();
-		MockHttpServletResponse response = result.getResponse();
-		assertEquals(HttpStatus.BAD_REQUEST.value(),response.getStatus());		
-	}
-	
-	/**
-	 * JUnit test for retrieving User, GET request
-	 * @throws Exception
-	 */
-	@Test
-	@Order(2)
-	void testRetireveUser_success() throws Exception {
-		Mockito.when(userService.findById(1)).thenReturn(userDTO);
-	    mvc.perform(MockMvcRequestBuilders
-	            .get("/users/1")
-	            .contentType(MediaType.APPLICATION_JSON))
-	            .andExpect(status().isFound())
-	            .andExpect(jsonPath("$", notNullValue()))
-	            .andExpect(jsonPath("$.username", is(userDTO.getUsername())));
-	}
-	
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    private UserService userService;
+
+    UserDTO userDTO = new UserDTO("hubert", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
+
+    String exampleUserJson = "{\r\n" + "    \"username\": \"hubert\",\r\n" + "    \"birthdate\": \"1996-01-01\",\r\n"
+            + "    \"country\":\"France\",\r\n" + "    \"phoneNumber\":\"0102030405\",\r\n"
+            + "    \"gender\":\"MALE\"\r\n" + "}";
+
+    String exampleInvalidUserJson = "{\r\n" + "    \"username\": \"\",\r\n" + "    \"birthdate\": \"1996-01-01\",\r\n"
+            + "    \"country\":\"France\",\r\n" + "    \"phoneNumber\":\"0102030405\",\r\n"
+            + "    \"gender\":\"male\"\r\n" + "}";
+
+    String exampleVoidUserJson = "{}";
+
+    /**
+     * JUnit test for creating User, POST request.
+     * 
+     * @throws Exception
+     */
+    @Test
+    @Rollback(false)
+    @Order(1)
+    void testCreateUser_success() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users").accept(MediaType.APPLICATION_JSON)
+                .content(exampleUserJson).contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
+        assertEquals(HttpStatus.CREATED.value(), response.getStatus());
+    }
+
+    /**
+     * JUnit test for creating Invalid User, POST request
+     * 
+     * @throws Exception
+     */
+    @Test
+    void testCreateUser_failureInvalidUser() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users").accept(MediaType.APPLICATION_JSON)
+                .content(exampleInvalidUserJson).contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+    }
+
+    /**
+     * JUnit test for creating void User, POST request.
+     * 
+     * @throws Exception
+     */
+    @Test
+    void testCreateUser_failureVoidUser() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users").accept(MediaType.APPLICATION_JSON)
+                .content(exampleVoidUserJson).contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+    }
+
+    /**
+     * JUnit test for retrieving User, GET request
+     * 
+     * @throws Exception
+     */
+    @Test
+    @Order(2)
+    void testRetireveUser_success() throws Exception {
+        Mockito.when(userService.findById(1)).thenReturn(userDTO);
+        mvc.perform(MockMvcRequestBuilders.get("/users/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isFound()).andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.username", is(userDTO.getUsername())));
+    }
+
 }
