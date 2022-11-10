@@ -106,17 +106,6 @@ class UserRepositoryTest {
     }
 
     /**
-     * Test to create user with null gender Asserts that it creates the user
-     * correctly
-     */
-    @Test
-    @Order(9)
-    void testCreateUser_failureInvalidTooLongGender() {
-        User us = repository.save(getUserTooLongGender());
-        assertThat(us.getId()).isGreaterThan(0);
-    }
-
-    /**
      * Create valid user
      * 
      * @return
@@ -159,14 +148,5 @@ class UserRepositoryTest {
      */
     User getUserTooLongPhoneNumber() {
         return new User("hubert", birthday, "Fra", "123456789 123456789 1", male);
-    }
-
-    /**
-     * Create invalid user with Gender longer than 8 character
-     * 
-     * @return
-     */
-    User getUserTooLongGender() {
-        return new User("hubert", birthday, "Fra", "0102030405", null);
     }
 }

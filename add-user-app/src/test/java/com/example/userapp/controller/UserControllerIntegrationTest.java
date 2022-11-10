@@ -48,8 +48,8 @@ class UserControllerIntegrationTest {
 
     /**
      * Integration test method, creates a user and save it in the database asserts
-     * that the response status is "201 Created". Tries to save the same user a
-     * second time and asserts that the response status is "400 Bad Request"
+     * that the response status is "201 Created". Tries to a user with wrong parameters
+     * asserts that the response status is "400 Bad Request"
      */
     @Test
     @Order(1)
@@ -69,7 +69,7 @@ class UserControllerIntegrationTest {
      * Integration test method retrieves the user created while testing the create
      * user method and assert that the response status is "302 Found".
      * 
-     * Then tries to retrieve user using wrong username and assert that the
+     * Then tries to retrieve user using wrong id and assert that the
      * responses status is "404 Not Found"
      */
     @Test

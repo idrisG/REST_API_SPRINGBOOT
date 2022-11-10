@@ -78,13 +78,12 @@ class UserServiceTest {
     }
 
     /**
-     * Unit test find by username failure, should return null user
+     * Unit test find by id failure, should return null
      */
     @Test
     void testFindById_failure() {
-        lenient().when(userRepository.findById(anyInt())).thenReturn(null);
-        User foundUser = userService.findByUsername("wrong username");
-        assertNull(foundUser);
+        lenient().when(userRepository.findById(anyInt())).thenReturn(Optional.empty());
+        assertThat(userService.findById(0)).isNull();
     }
 
 }
