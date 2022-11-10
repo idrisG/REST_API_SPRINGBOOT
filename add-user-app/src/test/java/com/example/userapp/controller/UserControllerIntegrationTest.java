@@ -48,7 +48,7 @@ class UserControllerIntegrationTest {
 
     /**
      * Integration test method, creates a user and save it in the database asserts
-     * that the response status is "201 Created". Tries to a user with wrong parameters
+     * that the response status is "201 Created". Tries to save a user with wrong parameters
      * asserts that the response status is "400 Bad Request"
      */
     @Test
