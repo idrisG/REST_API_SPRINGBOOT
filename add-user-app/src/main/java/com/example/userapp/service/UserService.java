@@ -18,21 +18,11 @@ import com.example.userapp.repository.UserRepository;
  */
 @Service("userService")
 public class UserService {
-
+	@Autowired
     private UserRepository userRepository;
 
     @Autowired
     private ModelMapper modelMapper;
-
-    /**
-     * Constructor
-     * 
-     * @param userRepository
-     */
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public UserService(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;

@@ -29,18 +29,9 @@ import com.example.userapp.validator.UserValidator;
  */
 @RestController
 public class UserController {
-
+	/** Injection of userService*/
+	@Autowired
     private UserService userService;
-
-    /**
-     * Constructor
-     * 
-     * @param userService
-     */
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     /**
      * Binds custom UserValidator

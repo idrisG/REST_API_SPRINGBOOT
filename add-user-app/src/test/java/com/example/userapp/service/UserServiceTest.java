@@ -18,6 +18,7 @@ import com.example.userapp.dto.UserDTO;
 import com.example.userapp.model.Gender;
 import com.example.userapp.model.User;
 import com.example.userapp.repository.UserRepository;
+import java.util.Optional;
 
 /**
  * Unit test class for UserService
