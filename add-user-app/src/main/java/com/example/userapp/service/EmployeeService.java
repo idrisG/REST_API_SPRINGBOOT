@@ -1,7 +1,6 @@
 package com.example.userapp.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,22 +41,20 @@ public class EmployeeService implements UserDetailsService {
 	 */
 	private List<Employee> loadEmployee(){
 		List<Employee> list = new ArrayList<>();
-		list.add(new Employee("Idris","password","USER"));
-		list.add(new Employee("Jean","pass","USER"));
-		list.add(new Employee("Arnaud","123","USER"));
+		list.add(new Employee("idris","password","ADMIN"));
+		list.add(new Employee("jean","pass","USER"));
+		list.add(new Employee("arnaud","123","USER"));
 		return list;
 	}
 	/**
 	 * Save an employee in the database if the username isn't already used
 	 * @param employee
-	 * @return
-	 * @throws Exception
+	 * @return saved employee if username not used, null otherwise
 	 * @see {@link org.springframework.data.repository.CrudRepository#save(Object) CrudRepository.save(Object)}
 	 */
-	//TODO create exception specifique to username already used or deal with this in a validator
-	public Employee createEmployee(Employee employee) throws Exception {
+	public Employee createEmployee(Employee employee) {
 		if(findByUsername(employee.getUsername())!=null) {
-			throw new Exception();
+			return null;
 		}
 		employee.setPassword(encoder().encode(employee.getPassword()));
 		return employeeRepository.save(employee);
@@ -79,7 +76,6 @@ public class EmployeeService implements UserDetailsService {
 	public Employee findByUsername(String username){
 		return employeeRepository.findByUsername(username);
 	}
-
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -87,7 +83,7 @@ public class EmployeeService implements UserDetailsService {
 		if(employee == null) {
 			throw new UsernameNotFoundException(username);
 		}
-		return User.withUsername(username).password(employee.getPassword()).roles(employee.getPosition()).build();
+		return User.withUsername(username).password(employee.getPassword()).roles(employee.getRole()).build();
 	}
 	
 	@Bean

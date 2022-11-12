@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.userapp.annotation.Log;
 import com.example.userapp.dto.UserDTO;
-import com.example.userapp.exception.UserFormException;
+import com.example.userapp.exception.CustomFormException;
 import com.example.userapp.service.UserService;
 import com.example.userapp.validator.UserValidator;
 
@@ -45,18 +45,18 @@ public class UserController {
 
     /**
      * Create user and register in database if user is Validated by our custom
-     * UserValidator and user.username isn't already used
+     * UserValidator
      * 
      * @param user
      * @param bindingResult
      * @return
-     * @throw UserFormException
+     * @throw CustomFormException
      */
     @Log
     @PostMapping("/users")
     public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserDTO userDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            throw new UserFormException(HttpStatus.BAD_REQUEST, bindingResult);
+            throw new CustomFormException(HttpStatus.BAD_REQUEST, bindingResult);
         }
         userDTO = userService.createUser(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
@@ -79,5 +79,5 @@ public class UserController {
         }
         return new ResponseEntity<>(userDTO, HttpStatus.FOUND);
     }
-
+    
 }

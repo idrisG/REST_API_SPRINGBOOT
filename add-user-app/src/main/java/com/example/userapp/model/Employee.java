@@ -1,8 +1,6 @@
 package com.example.userapp.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -11,25 +9,17 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "employees")
 public class Employee {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer id;
-	@NotBlank
+	@NotBlank(message = "username cannot be blank ! ")
 	public String username;
 	public String password;
-	public String position;
+	public String role = "USER";
 	
 	public Employee() {}
 	
-	public Employee(String username, String password, String position) {
+	public Employee(String username, String password, String role) {
 		this.username = username;
 		this.password = password;
-		this.position = position;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
+		this.role = role;
 	}
 	public String getUsername() {
 		return username;
@@ -43,11 +33,11 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPosition() {
-		return position;
+	public String getRole() {
+		return role;
 	}
-	public void setPosition(String position) {
-		this.position = position;
+	public void setRole(String position) {
+		this.role = position;
 	}
 	
 	
