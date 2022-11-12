@@ -118,10 +118,14 @@ You can find openAPI doc at http://localhost:8080/v3/api-docs
 
 You can find swagger at http://localhost:8080/swagger-ui.html
 
+If you use swagger a pop-up window asking for username and password will open.
 
-You can use Postman to make your POST and GET requests (POST request url : localhost:8080/users or localhost:8080/e;ployees ; GET request url : localhost:8080/users/$id or localhost:8080/employees)
+
+You can use Postman to make your POST and GET requests (POST request url : localhost:8080/users or localhost:8080/employees ; GET request url : localhost:8080/users/$id or localhost:8080/employees)
 
 You can find a Postman collection in the git repository.
+
+```To pass the security while using postman you need to click on "Autorization" -> change the type of Authorization to "Basic Auth" -> fill fields "username" and "password"```
 
 <img src="get-request.png" >
 <img src="post-request.png">
