@@ -103,7 +103,16 @@ Using the terminal go to the project directory enter the directory (where the po
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once you launch the Application you can either use postman or swagger :
+Once you launch the Application you can either use postman or swagger. 
+In any case you have to pass through authentication :
+Possible Employee username + password : 
+<ul>
+<li>idris + password</li>
+<li>jean + pass</li>
+<li>arnaud + 123</li>
+</ul>
+
+Note that only idris has the role of ADMIN and can view the list of employees or create employees.
 
 You can find openAPI doc at http://localhost:8080/v3/api-docs
 
