@@ -3,7 +3,6 @@ package com.example.userapp.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
@@ -22,8 +21,6 @@ import com.example.userapp.repository.EmployeeRepository;
 public class EmployeeService implements UserDetailsService {
 	private EmployeeRepository employeeRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
 	/**
 	 * Constructor, Initialize database with list of employee since database is empty when launching app
 	 * @param employeeRepository
@@ -56,9 +53,9 @@ public class EmployeeService implements UserDetailsService {
 	 * @return saved employee if username not used, null otherwise
 	 * @see {@link org.springframework.data.repository.CrudRepository#save(Object) CrudRepository.save(Object)}
 	 */
-	public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+	public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) throws IllegalArgumentException {
 		if(findByUsername(employeeDTO.getUsername())!=null) {
-			return null;
+			throw new IllegalArgumentException("Username already used ! ");
 		}
 		employeeDTO.setPassword(encoder().encode(employeeDTO.getPassword()));
 		return entityToDTO(employeeRepository.save(dtoToEntity(employeeDTO)));
@@ -108,7 +105,7 @@ public class EmployeeService implements UserDetailsService {
         if (employee == null) {
             return null;
         }
-        return modelMapper.map(employee, EmployeeDTO.class);
+        return new EmployeeDTO(employee.getUsername(), employee.getPassword(), employee.getRole());
     }
 
     /**
@@ -121,6 +118,6 @@ public class EmployeeService implements UserDetailsService {
         if (employeeDTO == null) {
             return null;
         }
-        return modelMapper.map(employeeDTO, Employee.class);
+        return new Employee(employeeDTO.getUsername(), employeeDTO.getPassword(), employeeDTO.getRole());
     }
 }
