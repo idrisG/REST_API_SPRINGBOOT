@@ -5,6 +5,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Database entity stored in the table employees
+ * 
+ * @author idris
+ *
+ */
 @Entity
 @Table(name = "employees")
 public class Employee {

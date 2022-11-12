@@ -65,7 +65,7 @@ public class EmployeeService implements UserDetailsService {
 	}
 	
 	/**
-	 * find all instance of Employee in database,
+	 * Find all instance of Employee in database, and lists their username
 	 * @see  {@link org.springframework.data.repository.CrudRepository#findAll() CrudRepository.findAll()}
 	 * @return List of the usernames
 	 */
@@ -108,8 +108,7 @@ public class EmployeeService implements UserDetailsService {
         if (employee == null) {
             return null;
         }
-        EmployeeDTO employeeDTO = modelMapper.map(employee, EmployeeDTO.class);
-        return employeeDTO;
+        return modelMapper.map(employee, EmployeeDTO.class);
     }
 
     /**
@@ -122,7 +121,6 @@ public class EmployeeService implements UserDetailsService {
         if (employeeDTO == null) {
             return null;
         }
-        Employee employee = modelMapper.map(employeeDTO, Employee.class);
-        return employee;
+        return modelMapper.map(employeeDTO, Employee.class);
     }
 }

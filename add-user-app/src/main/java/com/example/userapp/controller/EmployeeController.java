@@ -18,6 +18,12 @@ import com.example.userapp.dto.EmployeeDTO;
 import com.example.userapp.exception.CustomFormException;
 import com.example.userapp.service.EmployeeService;
 
+/**
+ * Rest controller of our API for employee
+ * 
+ * @author idris
+ *
+ */
 @RestController
 public class EmployeeController {
 	/**
