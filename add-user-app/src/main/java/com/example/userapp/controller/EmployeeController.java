@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import com.example.userapp.service.EmployeeService;
  *
  */
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class EmployeeController {
 	/**
 	 * Injection of employeeService
@@ -34,12 +36,13 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	/**
      * Get all usernames of employee registered in database
+     * returns ResponseEntity with http status OK since FOUND is used for redirect
      * @return
      */
     @Log
     @GetMapping("/employees")
     public ResponseEntity<List<String>> getEmployees() {      
-        return new ResponseEntity<>(employeeService.findAllUsername(), HttpStatus.FOUND);
+        return new ResponseEntity<>(employeeService.findAllUsername(), HttpStatus.OK);
     }
     
     /**
@@ -63,5 +66,15 @@ public class EmployeeController {
         } catch(IllegalArgumentException e) {
         	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+    /**
+     * login called if the user is authenticated
+     * @return
+     */
+    @Log
+    @PostMapping("/employees/login")
+    public boolean login() {
+    	return true;
+    	
     }
 }

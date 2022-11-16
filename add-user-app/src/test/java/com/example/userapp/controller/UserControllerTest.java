@@ -130,7 +130,8 @@ class UserControllerTest {
     void testRetireveUser_success() throws Exception {
         Mockito.when(userService.findById(1)).thenReturn(userDTO);
         mvc.perform(MockMvcRequestBuilders.get("/users/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isFound()).andExpect(jsonPath("$", notNullValue()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.username", is(userDTO.getUsername())));
     }
 

@@ -130,7 +130,7 @@ public class EmployeeControllerTest {
         Mockito.when(employeeService.findAllUsername()).thenReturn(usernames);
         mvc.perform(MockMvcRequestBuilders.get("/employees")
         		.contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$", notNullValue()));
     }
 

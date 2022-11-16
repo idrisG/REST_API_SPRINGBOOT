@@ -83,7 +83,7 @@ class ControllerIntegrationTest {
         restTemplate = new TestRestTemplate("idris","password");
         ResponseEntity<String> response = restTemplate.exchange(createUrlWithPort("/users/1"), HttpMethod.GET, entity,
                 String.class);
-        assertEquals(HttpStatus.FOUND, response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
 
         response = restTemplate.exchange(createUrlWithPort("/users/10"), HttpMethod.GET, entity, String.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());

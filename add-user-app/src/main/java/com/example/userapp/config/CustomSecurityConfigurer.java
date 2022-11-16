@@ -36,15 +36,15 @@ public class CustomSecurityConfigurer {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable() //Disable necessity of the token, cross domain call possible
 			.authorizeRequests()
-			.antMatchers("/users")
+			.antMatchers("/users/*")
+			.permitAll()
+			.antMatchers("/employees/login")
 			.authenticated()
-			.antMatchers("/employees")
-			.hasRole("ADMIN")
 			.anyRequest() //For all requests
 			.authenticated() //need to authenticate
 			.and()
 			.httpBasic()
 			.authenticationEntryPoint(authenticationEntryPoint);
-		return http.build();
+		return http.cors().and().build();
 	}
 }

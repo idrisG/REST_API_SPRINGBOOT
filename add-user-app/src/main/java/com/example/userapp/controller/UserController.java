@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import com.example.userapp.validator.UserValidator;
  *
  */
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class UserController {
 	/** Injection of userService*/
 	@Autowired
@@ -77,7 +79,7 @@ public class UserController {
         if (userDTO == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User : " + id + " Not Found");
         }
-        return new ResponseEntity<>(userDTO, HttpStatus.FOUND);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
     
 }
