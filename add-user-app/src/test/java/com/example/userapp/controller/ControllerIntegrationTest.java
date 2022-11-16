@@ -71,7 +71,7 @@ class ControllerIntegrationTest {
 
     /**
      * Integration test method retrieves the user created while testing the create
-     * user method and assert that the response status is "302 Found".
+     * user method and assert that the response status is "200 OK".
      * 
      * Then tries to retrieve user using wrong id and assert that the
      * responses status is "404 Not Found"
@@ -113,7 +113,7 @@ class ControllerIntegrationTest {
     }
     /**
      * Integration test method, retrieve all usernames of stored employees 
-     * and assert that the response status is "302 Found".
+     * and assert that the response status is "200 OK".
      */
     @Test
     @Order(4)
@@ -122,7 +122,7 @@ class ControllerIntegrationTest {
         restTemplate = new TestRestTemplate("idris","password");
         ResponseEntity<String> response = restTemplate.exchange(createUrlWithPort("/employees"), HttpMethod.GET, entity,
                 String.class);
-        assertEquals(HttpStatus.FOUND, response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     /**
