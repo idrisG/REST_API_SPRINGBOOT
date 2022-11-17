@@ -32,7 +32,7 @@ class EmployeeRepositoryTest {
     @Rollback(false)
     @Order(1)
     void testCreateUser_success() {
-        Employee employee = repository.save(new Employee("idris","password","USER"));
+        Employee employee = repository.save(new Employee(0,"idris","password","USER"));
         assertThat(employee.getUsername()).isEqualTo("idris");
     }
 
@@ -63,7 +63,7 @@ class EmployeeRepositoryTest {
     @Test
     @Order(5)
     void testCreateUser_failureInvalidNullUsername() {
-        Assertions.assertThrows(ConstraintViolationException.class, () -> repository.save(new Employee(null,"","")));
+        Assertions.assertThrows(ConstraintViolationException.class, () -> repository.save(new Employee(null,null,"","")));
     }
 
 }

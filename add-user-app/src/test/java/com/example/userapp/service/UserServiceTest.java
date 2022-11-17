@@ -13,8 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
 import com.example.userapp.dto.UserDTO;
+import com.example.userapp.mapper.UserMapper;
 import com.example.userapp.model.Gender;
 import com.example.userapp.model.User;
 import com.example.userapp.repository.UserRepository;
@@ -30,7 +30,7 @@ import java.util.Optional;
 class UserServiceTest {
 
     @Mock
-    private ModelMapper modelMapper;
+    private UserMapper userMapper;
     @Mock
     private UserRepository userRepository;
 
@@ -42,8 +42,8 @@ class UserServiceTest {
     String phoneNumber = "0102030405";
     Gender gender = Gender.MALE;
 
-    private UserDTO userDTO = new UserDTO(username, birthdateDate, country, phoneNumber, gender);
-    private User user = new User(username, birthdateDate, country, phoneNumber, gender);
+    private UserDTO userDTO = new UserDTO(0,username, birthdateDate, country, phoneNumber, gender);
+    private User user = new User(0,username, birthdateDate, country, phoneNumber, gender);
 
     /**
      * Unit test find user by username success
@@ -66,9 +66,8 @@ class UserServiceTest {
     @Test
     void testCreateUser_success() {
         when(userRepository.save(org.mockito.ArgumentMatchers.any())).thenReturn(user);
-        when(modelMapper.map(user, UserDTO.class)).thenReturn(userDTO);
-        when(modelMapper.map(userDTO, User.class)).thenReturn(user);
-
+        when(userMapper.dtoToEntity(userDTO)).thenReturn(user);
+        when(userMapper.entityToDTO(user)).thenReturn(userDTO);
         UserDTO savedUser = userService.createUser(userDTO);
         assertNotNull(savedUser);
         assertThat(savedUser.getUsername()).isSameAs(username);

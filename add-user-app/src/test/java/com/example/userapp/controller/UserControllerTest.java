@@ -58,7 +58,7 @@ class UserControllerTest {
     @MockBean
     private EmployeeService employeeService;
 
-    UserDTO userDTO = new UserDTO("hubert", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
+    UserDTO userDTO = new UserDTO(0,"hubert", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
 
     String exampleUserJson = "{\r\n" + "    \"username\": \"hubert\",\r\n" + "    \"birthdate\": \"1996-01-01\",\r\n"
             + "    \"country\":\"France\",\r\n" + "    \"phoneNumber\":\"0102030405\",\r\n"

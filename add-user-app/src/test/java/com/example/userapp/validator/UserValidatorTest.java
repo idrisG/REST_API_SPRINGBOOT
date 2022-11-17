@@ -69,7 +69,7 @@ public class UserValidatorTest {
      * @return
      */
     UserDTO getUser() {
-        return new UserDTO("huber", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
+        return new UserDTO(0,"huber", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
     }
 
     /**
@@ -78,7 +78,7 @@ public class UserValidatorTest {
      * @return
      */
     UserDTO getMajorUserFullError() {
-        return new UserDTO("huber!!!", LocalDate.of(1996, 01, 01), "France!!!!", "0102030405!!!!!", Gender.MALE);
+        return new UserDTO(0,"huber!!!", LocalDate.of(1996, 01, 01), "France!!!!", "0102030405!!!!!", Gender.MALE);
     }
 
     /**
@@ -87,6 +87,6 @@ public class UserValidatorTest {
      * @return
      */
     UserDTO getMinorUserFullError() {
-        return new UserDTO("huber!!!", LocalDate.of(2008, 01, 01), "France!!!!", "0102030405!!!!!", null);
+        return new UserDTO(0,"huber!!!", LocalDate.of(2008, 01, 01), "France!!!!", "0102030405!!!!!", null);
     }
 }

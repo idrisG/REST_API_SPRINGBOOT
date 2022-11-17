@@ -2,11 +2,11 @@ package com.example.userapp.service;
 
 import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.userapp.dto.UserDTO;
+import com.example.userapp.mapper.UserMapper;
 import com.example.userapp.model.User;
 import com.example.userapp.repository.UserRepository;
 
@@ -22,12 +22,8 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
-        this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
-    }
 
     /**
      * Find user by username in repository (database)
@@ -47,7 +43,7 @@ public class UserService {
      * @return saved user transformed to DTO
      */
     public UserDTO createUser(UserDTO userDTO) {
-        return entityToDTO(userRepository.save(dtoToEntity(userDTO)));
+    	return this.userMapper.entityToDTO(userRepository.save(this.userMapper.dtoToEntity(userDTO)));
     }
 
     /**
@@ -60,35 +56,6 @@ public class UserService {
         if (user.isEmpty()) {
             return null;
         }
-        return entityToDTO(user.get());
+        return this.userMapper.entityToDTO(user.get());
     }
-
-    /**
-     * Method that transform an entity to a dto
-     * 
-     * @param user must never be null
-     * @return
-     */
-    private UserDTO entityToDTO(User user) {
-        if (user == null) {
-            return null;
-        }
-        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
-        return userDTO;
-    }
-
-    /**
-     * Method that transform a dto to an entity
-     * 
-     * @param userDTO must never be null
-     * @return
-     */
-    private User dtoToEntity(UserDTO userDTO) {
-        if (userDTO == null) {
-            return null;
-        }
-        User user = modelMapper.map(userDTO, User.class);
-        return user;
-    }
-
 }

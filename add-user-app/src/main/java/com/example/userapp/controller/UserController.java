@@ -41,7 +41,7 @@ public class UserController {
      * @param binder
      */
     @InitBinder(value = "userDTO")
-    protected void initBinder(WebDataBinder binder) {
+    protected void initBinder(WebDataBinder binder) { //TODO create custom validator using AOP for userDTO so we don't need to binde validator
         binder.addValidators(new UserValidator());
     }
 

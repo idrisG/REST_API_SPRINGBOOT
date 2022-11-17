@@ -111,7 +111,7 @@ class UserRepositoryTest {
      * @return
      */
     User getUser() {
-        return new User("huber", birthday, "Fra", "0102030405", male);
+        return new User(0,"huber", birthday, "Fra", "0102030405", male);
     }
 
     /**
@@ -120,7 +120,7 @@ class UserRepositoryTest {
      * @return
      */
     User getUserNullUsername() {
-        return new User(null, birthday, "Fra", "0102030405", male);
+        return new User(0,null, birthday, "Fra", "0102030405", male);
     }
 
     /**
@@ -129,7 +129,7 @@ class UserRepositoryTest {
      * @return
      */
     User getUserNullBirthdate() {
-        return new User("huber", null, "Fra", "0102030405", male);
+        return new User(0,"huber", null, "Fra", "0102030405", male);
     }
 
     /**
@@ -138,7 +138,7 @@ class UserRepositoryTest {
      * @return
      */
     User getUserNullCountry() {
-        return new User("hubert", birthday, null, "0102030405", male);
+        return new User(0,"hubert", birthday, null, "0102030405", male);
     }
 
     /**
@@ -147,6 +147,6 @@ class UserRepositoryTest {
      * @return
      */
     User getUserTooLongPhoneNumber() {
-        return new User("hubert", birthday, "Fra", "123456789 123456789 1", male);
+        return new User(0,"hubert", birthday, "Fra", "123456789 123456789 1", male);
     }
 }

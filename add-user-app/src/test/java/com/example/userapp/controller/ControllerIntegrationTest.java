@@ -47,8 +47,8 @@ class ControllerIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
 
-    UserDTO user = new UserDTO("hubert_test", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
-    UserDTO user_wrong = new UserDTO("hubert_test!!!", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
+    UserDTO user = new UserDTO(0,"hubert_test", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
+    UserDTO user_wrong = new UserDTO(0,"hubert_test!!!", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
     EmployeeDTO employee = new EmployeeDTO("hubert","pass","USER");
     /**
      * Integration test method, creates a user and save it in the database asserts

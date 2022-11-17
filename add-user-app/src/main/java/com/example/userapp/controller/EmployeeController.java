@@ -68,7 +68,7 @@ public class EmployeeController {
         }
     }
     /**
-     * login called if the user is authenticated
+     * login called if the user is authenticated. Used as a "flag" for client
      * @return
      */
     @Log

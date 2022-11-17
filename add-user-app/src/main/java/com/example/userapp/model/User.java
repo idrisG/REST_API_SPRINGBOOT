@@ -18,6 +18,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * Database entity stored in the table users
  * 
@@ -26,6 +31,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
 
     private static final long serialVersionUID = 8268187804307724173L;
@@ -54,87 +63,16 @@ public class User implements Serializable {
     private Gender gender;
 
     /**
-     * Default constructor
-     */
-    public User() {
-
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param username
-     * @param birthdate
-     * @param country
-     * @param phoneNumber
-     * @param gender
-     */
-    public User(String username, LocalDate birthdate, String country, String phoneNumber, Gender gender) {
-        this.username = username;
-        this.birthdate = birthdate;
-        this.country = country;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
-
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    /**
      * toString (to display in the console log)
      */
     public String toString() {
-        String s = " User { Username : " + getUsername() + " ; Birthdate :  " + getBirthdate()
-                + " ; Country of residence : " + getCountry() + " ; Phone Number : " + getPhoneNumber() + " ; Gender : "
-                + getGender() + " }";
-        return s;
+        return new StringBuilder()
+        		.append(" User { Username : ").append(this.getUsername())
+        		.append(" ; Birthdate :  ").append(this.getBirthdate())
+        		.append(" ; Country of residence : ").append(this.getCountry())
+        		.append(" ; Phone Number : ").append(this.getPhoneNumber())
+        		.append(" ; Gender : ").append(this.getGender()).append(" }").toString();
+        		
 
     }
-
 }

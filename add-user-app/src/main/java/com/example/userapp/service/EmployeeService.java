@@ -14,20 +14,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.userapp.dto.EmployeeDTO;
+import com.example.userapp.mapper.EmployeeMapper;
 import com.example.userapp.model.Employee;
 import com.example.userapp.repository.EmployeeRepository;
-
+/**
+ * EmployeeService used to take action on employeeRepository.
+ * Also used for authentication of API user.
+ * @see {@link 
+org.springframework.security.core.userdetails.UserDetailsService org.springframework.security.core.userdetails.UserDetailsService}
+ * @author idris
+ *
+ */
 @Service("employeeService")
 public class EmployeeService implements UserDetailsService {
 	private EmployeeRepository employeeRepository;
+	private EmployeeMapper employeeMapper;
 
 	/**
 	 * Constructor, Initialize database with list of employee since database is empty when launching app
 	 * @param employeeRepository
 	 */
 	@Autowired
-	public EmployeeService(EmployeeRepository employeeRepository) {
+	public EmployeeService(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper) {
 		this.employeeRepository = employeeRepository;
+		this.employeeMapper = employeeMapper;
 		this.employeeRepository.saveAll(loadEmployee()
 				.stream()
 				.map(e->{
@@ -42,9 +52,9 @@ public class EmployeeService implements UserDetailsService {
 	 */
 	private List<Employee> loadEmployee(){
 		List<Employee> list = new ArrayList<>();
-		list.add(new Employee("idris","password","ADMIN"));
-		list.add(new Employee("jean","pass","USER"));
-		list.add(new Employee("arnaud","123","USER"));
+		list.add(new Employee(0,"idris","password","ADMIN"));
+		list.add(new Employee(0,"jean","pass","USER"));
+		list.add(new Employee(0,"arnaud","123","USER"));
 		return list;
 	}
 	/**
@@ -58,7 +68,7 @@ public class EmployeeService implements UserDetailsService {
 			throw new IllegalArgumentException("Username already used ! ");
 		}
 		employeeDTO.setPassword(encoder().encode(employeeDTO.getPassword()));
-		return entityToDTO(employeeRepository.save(dtoToEntity(employeeDTO)));
+		return employeeMapper.entityToDTO(employeeRepository.save(employeeMapper.dtoToEntity(employeeDTO)));
 	}
 	
 	/**
@@ -79,7 +89,7 @@ public class EmployeeService implements UserDetailsService {
 	 * @return Employee if found, null otherwise
 	 */
 	public EmployeeDTO findByUsername(String username){
-		return entityToDTO(employeeRepository.findByUsername(username));
+		return employeeMapper.entityToDTO(employeeRepository.findByUsername(username));
 	}
 	
 	@Override
@@ -90,34 +100,12 @@ public class EmployeeService implements UserDetailsService {
 		}
 		return User.withUsername(username).password(employeeDTO.getPassword()).roles(employeeDTO.getRole()).build();
 	}
-	
+	/**
+	 * Password encoder using BCryptPasswordEncoder
+	 * @return PasswordEncoder
+	 */
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
-    /**
-     * Method that transform an entity to a dto
-     * 
-     * @param employee
-     * @return
-     */
-    private EmployeeDTO entityToDTO(Employee employee) {
-        if (employee == null) {
-            return null;
-        }
-        return new EmployeeDTO(employee.getUsername(), employee.getPassword(), employee.getRole());
-    }
-
-    /**
-     * Method that transform a dto to an entity
-     * 
-     * @param employeeDTO
-     * @return
-     */
-    private Employee dtoToEntity(EmployeeDTO employeeDTO) {
-        if (employeeDTO == null) {
-            return null;
-        }
-        return new Employee(employeeDTO.getUsername(), employeeDTO.getPassword(), employeeDTO.getRole());
-    }
 }

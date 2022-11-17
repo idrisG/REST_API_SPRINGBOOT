@@ -7,6 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * Database entity stored in the table employees
  * 
@@ -15,6 +20,10 @@ import javax.validation.constraints.NotBlank;
  */
 @Entity
 @Table(name = "employees")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,33 +32,5 @@ public class Employee {
 	@NotBlank(message = "username cannot be blank ! ")
 	public String username;
 	public String password;
-	public String role = "USER";
-	
-	public Employee() {}
-	
-	public Employee(String username, String password, String role) {
-		this.username = username;
-		this.password = password;
-		this.role = role;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String position) {
-		this.role = position;
-	}
-	
-	
+	public String role = "USER";	
 }

@@ -13,7 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.userapp.auth.MyBasicAuthenticationEntryPoint;
 import com.example.userapp.service.EmployeeService;
-
+/**
+ * Security configurer for authentication and authorization
+ * @author idris
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -40,6 +44,8 @@ public class CustomSecurityConfigurer {
 			.permitAll()
 			.antMatchers("/employees/login")
 			.authenticated()
+			.antMatchers("/employees")
+			.hasRole("ADMIN")
 			.anyRequest() //For all requests
 			.authenticated() //need to authenticate
 			.and()
