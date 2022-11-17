@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.userapp.annotation.Log;
 import com.example.userapp.dto.UserDTO;
-import com.example.userapp.exception.UserFormException;
+import com.example.userapp.exception.CustomFormException;
 import com.example.userapp.service.UserService;
 import com.example.userapp.validator.UserValidator;
 
@@ -28,6 +29,7 @@ import com.example.userapp.validator.UserValidator;
  *
  */
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class UserController {
 	/** Injection of userService*/
 	@Autowired
@@ -39,24 +41,24 @@ public class UserController {
      * @param binder
      */
     @InitBinder(value = "userDTO")
-    protected void initBinder(WebDataBinder binder) {
+    protected void initBinder(WebDataBinder binder) { //TODO create custom validator using AOP for userDTO so we don't need to binde validator
         binder.addValidators(new UserValidator());
     }
 
     /**
      * Create user and register in database if user is Validated by our custom
-     * UserValidator and user.username isn't already used
+     * UserValidator
      * 
      * @param user
      * @param bindingResult
      * @return
-     * @throw UserFormException
+     * @throw CustomFormException
      */
     @Log
     @PostMapping("/users")
     public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserDTO userDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            throw new UserFormException(HttpStatus.BAD_REQUEST, bindingResult);
+            throw new CustomFormException(HttpStatus.BAD_REQUEST, bindingResult);
         }
         userDTO = userService.createUser(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
@@ -77,7 +79,7 @@ public class UserController {
         if (userDTO == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User : " + id + " Not Found");
         }
-        return new ResponseEntity<>(userDTO, HttpStatus.FOUND);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
-
+    
 }

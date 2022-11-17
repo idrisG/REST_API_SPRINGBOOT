@@ -7,7 +7,7 @@ import com.example.userapp.model.User;
 
 /**
  * User repository extending from CrudRepository
- * 
+ * @see {@link org.springframework.data.repository.CrudRepository CrudRepository}
  * @author idris
  *
  */

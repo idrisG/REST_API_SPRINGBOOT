@@ -1,5 +1,7 @@
 package com.example.userapp.controller;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,6 +32,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.example.userapp.dto.UserDTO;
 import com.example.userapp.model.Gender;
+import com.example.userapp.service.EmployeeService;
 import com.example.userapp.service.UserService;
 import com.example.userapp.validator.UserValidator;
 
@@ -52,7 +55,10 @@ class UserControllerTest {
     @MockBean
     private UserService userService;
 
-    UserDTO userDTO = new UserDTO("hubert", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
+    @MockBean
+    private EmployeeService employeeService;
+
+    UserDTO userDTO = new UserDTO(0,"hubert", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
 
     String exampleUserJson = "{\r\n" + "    \"username\": \"hubert\",\r\n" + "    \"birthdate\": \"1996-01-01\",\r\n"
             + "    \"country\":\"France\",\r\n" + "    \"phoneNumber\":\"0102030405\",\r\n"
@@ -73,9 +79,10 @@ class UserControllerTest {
     @Rollback(false)
     @Order(1)
     void testCreateUser_success() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users").accept(MediaType.APPLICATION_JSON)
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users")
+        		.with(csrf())
+        		.accept(MediaType.APPLICATION_JSON)
                 .content(exampleUserJson).contentType(MediaType.APPLICATION_JSON);
-
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         MockHttpServletResponse response = result.getResponse();
         assertEquals(HttpStatus.CREATED.value(), response.getStatus());
@@ -88,9 +95,10 @@ class UserControllerTest {
      */
     @Test
     void testCreateUser_failureInvalidUser() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users").accept(MediaType.APPLICATION_JSON)
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users")
+        		.with(csrf())
+        		.accept(MediaType.APPLICATION_JSON)
                 .content(exampleInvalidUserJson).contentType(MediaType.APPLICATION_JSON);
-
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         MockHttpServletResponse response = result.getResponse();
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
@@ -103,9 +111,10 @@ class UserControllerTest {
      */
     @Test
     void testCreateUser_failureVoidUser() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users").accept(MediaType.APPLICATION_JSON)
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/users")
+        		.with(csrf())
+        		.accept(MediaType.APPLICATION_JSON)
                 .content(exampleVoidUserJson).contentType(MediaType.APPLICATION_JSON);
-
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         MockHttpServletResponse response = result.getResponse();
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
@@ -121,7 +130,8 @@ class UserControllerTest {
     void testRetireveUser_success() throws Exception {
         Mockito.when(userService.findById(1)).thenReturn(userDTO);
         mvc.perform(MockMvcRequestBuilders.get("/users/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isFound()).andExpect(jsonPath("$", notNullValue()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.username", is(userDTO.getUsername())));
     }
 

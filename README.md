@@ -103,16 +103,29 @@ Using the terminal go to the project directory enter the directory (where the po
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once you launch the Application you can either use postman or swagger :
+Once you launch the Application you can either use postman or swagger. 
+In any case you have to pass through authentication :
+Possible Employee username + password : 
+<ul>
+<li>idris + password</li>
+<li>jean + pass</li>
+<li>arnaud + 123</li>
+</ul>
+
+Note that only idris has the role of ADMIN and can view the list of employees or create employees.
 
 You can find openAPI doc at http://localhost:8080/v3/api-docs
 
 You can find swagger at http://localhost:8080/swagger-ui.html
 
+If you use swagger a pop-up window asking for username and password will open.
 
-You can use Postman to make your POST and GET requests (POST request url : localhost:8080/users ; GET request url : localhost:8080/users/$id)
+
+You can use Postman to make your POST and GET requests (POST request url : localhost:8080/users or localhost:8080/employees ; GET request url : localhost:8080/users/$id or localhost:8080/employees)
 
 You can find a Postman collection in the git repository.
+
+```To pass the security while using postman you need to click on "Autorization" -> change the type of Authorization to "Basic Auth" -> fill fields "username" and "password"```
 
 <img src="get-request.png" >
 <img src="post-request.png">
