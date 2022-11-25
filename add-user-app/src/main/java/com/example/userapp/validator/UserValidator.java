@@ -62,7 +62,7 @@ public class UserValidator implements Validator {
     private boolean matchPhoneNumber(String phoneNumber) {
         return phoneNumber == null || "".equals(phoneNumber) || phoneNumber.trim().equals("")
                 || phoneNumber.matches("\\d{10}")
-                || phoneNumber.matches("\\d{2}[-\\.\\s]\\d{2}[-\\.\\s]\\d{2}[-\\.\\s]\\d{2}")
+                || phoneNumber.matches("\\d{2}[-\\.\\s]\\d{2}[-\\.\\s]\\d{2}[-\\.\\s]\\d{2}[-\\.\\s]\\d{2}")
                 || phoneNumber.matches("\\+\\d[1-4][-\\.\\s]\\d{9,10}") || phoneNumber.matches("\\+\\d[11-15]");
     }
 
