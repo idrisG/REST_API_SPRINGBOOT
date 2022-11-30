@@ -1,5 +1,7 @@
 package com.example.userapp.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,7 @@ public class UserController {
      * @param user
      * @param bindingResult
      * @return
-     * @throw CustomFormException
+     * @throw {@link com.example.userapp.exception.CustomFormException CustomFormException}
      */
     @Log
     @PostMapping("/users")
@@ -80,6 +82,18 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User : " + id + " Not Found");
         }
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+    
+    /**
+     * Retrieve all users found in database
+     * 
+     * @return
+     * @throw ResponseStatusException
+     */
+    @Log
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDTO>> retrieveAllUsers(){
+    	return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
     }
     
 }

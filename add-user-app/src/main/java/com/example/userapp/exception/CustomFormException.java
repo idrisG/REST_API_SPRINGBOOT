@@ -8,7 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 /**
  * ResponseStatusException adding message from BindingResult
- * 
+ * @see {@link org.springframework.web.server.ResponseStatusException ResponseStatusException}
  * @author idris
  *
  */
@@ -17,7 +17,7 @@ public class CustomFormException extends ResponseStatusException {
     private static final long serialVersionUID = 5579571395494894023L;
 
     /**
-     * Constructor
+     * Exception build using ResponseStatusException as blueprint
      * 
      * @param badRequest
      * @param result
