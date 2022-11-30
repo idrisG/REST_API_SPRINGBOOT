@@ -50,13 +50,30 @@ class ControllerIntegrationTest {
     UserDTO user = new UserDTO(0,"hubert_test", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
     UserDTO user_wrong = new UserDTO(0,"hubert_test!!!", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE);
     EmployeeDTO employee = new EmployeeDTO("hubert","pass","USER");
+    
+    /**
+     * Integration test method retrieves all users before any user is saved
+     * and assert that the response status is "200 OK".
+     * 
+     */
+    @Test
+    @Order(1)
+    public void testRetireveAllUser_void() {
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        restTemplate = new TestRestTemplate("idris","password");
+        ResponseEntity<String> response = restTemplate.exchange(createUrlWithPort("/users"), HttpMethod.GET, entity,
+                String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        
+    }
+    
     /**
      * Integration test method, creates a user and save it in the database asserts
      * that the response status is "201 Created". Tries to save a user with wrong parameters
      * asserts that the response status is "400 Bad Request"
      */
     @Test
-    @Order(1)
+    @Order(2)
     public void testCreateUser() {
         HttpEntity<UserDTO> entity = new HttpEntity<>(user, headers);
         restTemplate = new TestRestTemplate("idris","password");
@@ -77,7 +94,7 @@ class ControllerIntegrationTest {
      * responses status is "404 Not Found"
      */
     @Test
-    @Order(2)
+    @Order(3)
     public void testRetireveUser() {
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         restTemplate = new TestRestTemplate("idris","password");
@@ -88,6 +105,20 @@ class ControllerIntegrationTest {
         response = restTemplate.exchange(createUrlWithPort("/users/10"), HttpMethod.GET, entity, String.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
+    /**
+     * Integration test method retrieves all users created while testing the create
+     * user method and assert that the response status is "200 OK".
+     */
+    @Test
+    @Order(4)
+    public void testRetireveAllUser() {
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        restTemplate = new TestRestTemplate("idris","password");
+        ResponseEntity<String> response = restTemplate.exchange(createUrlWithPort("/users"), HttpMethod.GET, entity,
+                String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        
+    }
     
     /**
      * Integration test method, creates a employee and save it in the database asserts
@@ -97,7 +128,7 @@ class ControllerIntegrationTest {
      * @throws JsonMappingException 
      */
     @Test
-    @Order(3)
+    @Order(5)
     public void testCreateEmployee() throws JsonMappingException, JsonProcessingException {
         HttpEntity<EmployeeDTO> entity = new HttpEntity<>(employee, headers);
         restTemplate = new TestRestTemplate("idris","password");
@@ -116,7 +147,7 @@ class ControllerIntegrationTest {
      * and assert that the response status is "200 OK".
      */
     @Test
-    @Order(4)
+    @Order(6)
     public void testRetrieveEmployee() {
         HttpEntity<EmployeeDTO> entity = new HttpEntity<>(employee, headers);
         restTemplate = new TestRestTemplate("idris","password");

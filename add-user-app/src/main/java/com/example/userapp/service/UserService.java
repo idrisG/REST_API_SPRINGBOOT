@@ -1,6 +1,9 @@
 package com.example.userapp.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +60,17 @@ public class UserService {
             return null;
         }
         return this.userMapper.entityToDTO(user.get());
+    }
+    /**
+     * 
+     * @return
+     */
+    public List<UserDTO> findAll(){
+    	/*Iterable<User> iterable = this.userRepository.findAll();
+    	List<UserDTO> listUserDTO = new ArrayList<>();
+    	for(User u : iterable) {
+    		listUserDTO.add(this.userMapper.entityToDTO(u));
+    	}*/
+    	return StreamSupport.stream(this.userRepository.findAll().spliterator(),false).map(u->this.userMapper.entityToDTO(u)).toList();
     }
 }

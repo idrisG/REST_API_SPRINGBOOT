@@ -18,6 +18,10 @@ import com.example.userapp.mapper.UserMapper;
 import com.example.userapp.model.Gender;
 import com.example.userapp.model.User;
 import com.example.userapp.repository.UserRepository;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -86,4 +90,28 @@ class UserServiceTest {
         assertThat(userService.findById(0)).isNull();
     }
 
+    /**
+     * Unit test find all entity
+     */
+    @Test
+    void testFindAll() {
+    	Iterable<User> iterable = Arrays.asList(user, new User(1,username,birthdateDate, country, phoneNumber, gender));
+    	when(userRepository.findAll()).thenReturn(iterable);
+        when(userMapper.entityToDTO(any(User.class))).thenReturn(userDTO);
+    	List<UserDTO> listUserDTO = userService.findAll();
+    	assertThat(listUserDTO.get(0)).isNotNull();
+    	assertThat(listUserDTO.get(1)).isNotNull();
+    	assertThrows(IndexOutOfBoundsException.class,() -> listUserDTO.get(2));
+    }
+    
+    /**
+     * Unit test find all entity, no entity stored, assert that the returned list is empty
+     */
+    @Test
+    void testFindAll_void() {
+    	lenient().when(userRepository.findAll()).thenReturn(Collections.emptyList());
+    	List<UserDTO> listUserDTO = userService.findAll();
+    	assertThat(listUserDTO).isEmpty();
+    	assertThrows(IndexOutOfBoundsException.class,() -> listUserDTO.get(0));
+    }
 }

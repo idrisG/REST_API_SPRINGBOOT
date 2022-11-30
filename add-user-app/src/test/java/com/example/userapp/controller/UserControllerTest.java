@@ -4,11 +4,19 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -32,6 +40,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.example.userapp.dto.UserDTO;
 import com.example.userapp.model.Gender;
+import com.example.userapp.model.User;
 import com.example.userapp.service.EmployeeService;
 import com.example.userapp.service.UserService;
 import com.example.userapp.validator.UserValidator;
@@ -133,6 +142,36 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.username", is(userDTO.getUsername())));
+    }
+    
+    /**
+     * JUnit test for retrieving User, GET request
+     * 
+     * @throws Exception
+     */
+    @Test
+    void testRetireveAllUser_success() throws Exception {
+    	List<UserDTO> listUserDTO = Arrays.asList(new UserDTO(1,"hubert", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE), new UserDTO(2,"hubert", LocalDate.of(1996, 01, 01), "France", "0102030405", Gender.MALE));
+    	Mockito.when(userService.findAll()).thenReturn(listUserDTO);
+        mvc.perform(MockMvcRequestBuilders.get("/users").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.[0].id",is(1)))
+                .andExpect(jsonPath("$.[1].id",is(2)))
+                .andDo(print());
+    }
+    /**
+     * JUnit test for retrieving all users, GET request with no user previously saved
+     * Expect status to be OK 200 and body content to be an empty array []
+     * @throws Exception
+     */
+    @Test
+    void testRetireveAllUser_void() throws Exception {
+    	Mockito.when(userService.findAll()).thenReturn(Collections.emptyList());
+        mvc.perform(MockMvcRequestBuilders.get("/users").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("[]"))
+                .andDo(print());
     }
 
 }
