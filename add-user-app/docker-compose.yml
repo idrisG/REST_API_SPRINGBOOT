@@ -1,0 +1,32 @@
+version: '3.8'
+#each services is a container
+services: 
+  #our container named db
+  db:
+    #fetch image from hub (local image here)
+    image: postgres:latest
+    #environment param specific to postgre db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=testoffer
+    ports:
+      - '5432:5432'
+    networks:
+      - mynet
+  #our container named api
+  api:
+    #fetch image from hub (local image here)
+    image: rest-api:latest
+    #waits for db to be constructed
+    depends_on:
+      - db
+    ports:
+      - 8080:8080    
+    networks:
+      - mynet
+    links:
+      - db
+networks:
+  mynet:
+    name: my-shared-db-network
