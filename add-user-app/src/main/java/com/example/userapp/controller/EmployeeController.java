@@ -69,12 +69,13 @@ public class EmployeeController {
     }
     /**
      * login called if the user is authenticated. Used as a "flag" for client
+     * @return 
      * @return
      */
     @Log
     @PostMapping("/employees/login")
-    public boolean login() {
-    	return true;
+    public ResponseEntity<Boolean> login() {
+    	return new ResponseEntity<>(true,HttpStatus.OK);
     	
     }
 }
