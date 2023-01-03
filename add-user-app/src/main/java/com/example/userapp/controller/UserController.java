@@ -20,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.userapp.annotation.Log;
 import com.example.userapp.dto.UserDTO;
-import com.example.userapp.exception.CustomFormException;
 import com.example.userapp.service.UserService;
 import com.example.userapp.validator.UserValidator;
 
@@ -54,7 +53,7 @@ public class UserController {
      * @param user
      * @param bindingResult
      * @return
-     * @throw {@link com.example.userapp.exception.CustomFormException CustomFormException}
+     * @throw {@link com.example.userapp.controller.CustomFormException CustomFormException}
      */
     @Log
     @PostMapping("/users")

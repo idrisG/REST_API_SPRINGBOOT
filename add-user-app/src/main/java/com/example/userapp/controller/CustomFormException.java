@@ -1,4 +1,4 @@
-package com.example.userapp.exception;
+package com.example.userapp.controller;
 
 import java.util.stream.Collectors;
 
