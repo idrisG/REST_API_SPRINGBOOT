@@ -17,6 +17,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
+import com.example.userapp.auth.JwtTokenFilter;
+import com.example.userapp.auth.JwtUtils;
+import com.example.userapp.config.CustomSecurityConfigurer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -26,6 +29,8 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -52,7 +57,7 @@ import com.example.userapp.validator.UserValidator;
  *
  */
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(UserController.class)
+@WebMvcTest(value = UserController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {JwtTokenFilter.class, JwtUtils.class, CustomSecurityConfigurer.class}))
 @Import(UserValidator.class)
 @WithMockUser
 @TestMethodOrder(OrderAnnotation.class)
