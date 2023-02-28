@@ -3,8 +3,14 @@ package com.example.userapp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,10 +18,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.userapp.auth.JwtUtils;
 import com.example.userapp.dto.EmployeeDTO;
 import com.example.userapp.mapper.EmployeeMapper;
 import com.example.userapp.model.Employee;
+import com.example.userapp.model.JwtResponse;
+import com.example.userapp.model.LoginRequest;
 import com.example.userapp.repository.EmployeeRepository;
 /**
  * EmployeeService used to take action on employeeRepository.
@@ -29,6 +39,8 @@ org.springframework.security.core.userdetails.UserDetailsService org.springframe
 public class EmployeeService implements UserDetailsService {
 	private EmployeeRepository employeeRepository;
 	private EmployeeMapper employeeMapper;
+	@Autowired
+	private JwtUtils jwtUtils;
 
 	/**
 	 * Constructor, Initialize database with list of employee since database is empty when launching app
@@ -91,8 +103,22 @@ public class EmployeeService implements UserDetailsService {
 	public EmployeeDTO findByUsername(String username){
 		return employeeMapper.entityToDTO(employeeRepository.findByUsername(username));
 	}
+	//TODO search a better structure of this part (login has almost nothing to do with employeeService
+	/**
+	 * 
+	 * @param authentication
+	 * @return
+	 */
+	public JwtResponse login(Authentication authentication) {
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();		
+		return new JwtResponse(jwt, userDetails.getUsername(), 
+				userDetails.getAuthorities().stream().map(item -> item.getAuthority()).toList());
+	}
 	
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		EmployeeDTO employeeDTO = findByUsername(username);
 		if(employeeDTO == null) {

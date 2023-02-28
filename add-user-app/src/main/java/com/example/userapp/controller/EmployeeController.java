@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.userapp.annotation.Log;
 import com.example.userapp.dto.EmployeeDTO;
-import com.example.userapp.exception.CustomFormException;
+import com.example.userapp.model.JwtResponse;
+import com.example.userapp.model.LoginRequest;
 import com.example.userapp.service.EmployeeService;
 
 /**
@@ -34,6 +37,9 @@ public class EmployeeController {
 	 */
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
 	/**
      * Get all usernames of employee registered in database
      * returns ResponseEntity with http status OK since FOUND is used for redirect
@@ -68,14 +74,14 @@ public class EmployeeController {
         }
     }
     /**
-     * login called if the user is authenticated. Used as a "flag" for client
+     * login of user, if user credentials are validated then return a JwtResponse
      * @return 
-     * @return
      */
     @Log
     @PostMapping("/employees/login")
-    public ResponseEntity<Boolean> login() {
-    	return new ResponseEntity<>(true,HttpStatus.OK);
+    public ResponseEntity<JwtResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
+    	return new ResponseEntity<>(employeeService.login(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+    					loginRequest.getUsername(), loginRequest.getPassword()))),HttpStatus.OK);
     	
     }
 }
