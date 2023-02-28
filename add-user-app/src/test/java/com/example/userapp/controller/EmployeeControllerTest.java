@@ -11,6 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.userapp.auth.JwtTokenFilter;
+import com.example.userapp.auth.JwtUtils;
+import com.example.userapp.config.CustomSecurityConfigurer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -20,9 +23,12 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -41,7 +47,7 @@ import com.example.userapp.service.EmployeeService;
  *
  */
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(EmployeeController.class)
+@WebMvcTest(value = EmployeeController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {JwtTokenFilter.class, JwtUtils.class, CustomSecurityConfigurer.class}))
 @WithMockUser
 @TestMethodOrder(OrderAnnotation.class)
 public class EmployeeControllerTest {
@@ -50,7 +56,8 @@ public class EmployeeControllerTest {
     private MockMvc mvc;
     @MockBean
     private EmployeeService employeeService;
-
+    @MockBean
+    private AuthenticationManager authenticationManager;
     EmployeeDTO employeeDTO = new EmployeeDTO("Idriss","pass", "ADMIN");
 
     String exampleEmployeeJson = "{\r\n"

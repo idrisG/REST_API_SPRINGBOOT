@@ -55,8 +55,7 @@ public class EmployeeService implements UserDetailsService {
 				.map(e->{
 					e.setPassword(encoder().encode(e.getPassword())); 
 					return e;
-					})
-				.toList());
+					}).toList());
 	}
 	/**
 	 * Create list of employee to initialize in our employee database
@@ -71,7 +70,7 @@ public class EmployeeService implements UserDetailsService {
 	}
 	/**
 	 * Save an employee in the database if the username isn't already used
-	 * @param employee
+	 * @param employeeDTO
 	 * @return saved employee if username not used, null otherwise
 	 * @see {@link org.springframework.data.repository.CrudRepository#save(Object) CrudRepository.save(Object)}
 	 */
