@@ -2,7 +2,7 @@ package com.example.userapp.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ import com.example.userapp.validator.UserValidator;
  *
  */
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin({"http://localhost:4200", "http://localhost:4201"})
 public class UserController {
 	/** Injection of userService*/
 	@Autowired

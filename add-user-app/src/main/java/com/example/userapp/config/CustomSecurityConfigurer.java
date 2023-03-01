@@ -48,9 +48,9 @@ public class CustomSecurityConfigurer {
 		http.csrf().disable() //Disable necessity of the token, cross domain call possible
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests()
-			.antMatchers("/employees/login")
+			.requestMatchers("/employees/login")
 			.permitAll()
-			.antMatchers("/employees","/employees/**")
+			.requestMatchers("/employees","/employees/**")
 			.hasAnyAuthority("ROLE_ADMIN")
 			.anyRequest()
 			.authenticated() //need to authenticate

@@ -2,6 +2,7 @@ package com.example.userapp.auth;
 
 import java.util.Date;
 
+import io.jsonwebtoken.io.Decoders;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
@@ -29,7 +31,7 @@ public class JwtUtils {
 				.setSubject(employeePrincipal.getUsername())
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(new Date().getTime()+this.jwtExpirationMs))
-				.signWith(SignatureAlgorithm.HS512, this.jwtSecret)
+				.signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(this.jwtSecret)))
 				.compact();
 	}
 	//TODO Deal with Exceptions
