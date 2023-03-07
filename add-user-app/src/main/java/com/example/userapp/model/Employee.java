@@ -18,8 +18,8 @@ import lombok.Setter;
  * @author idris
  *
  */
-@Entity
-@Table(name = "employees")
+@Entity(name = "employees")
+//@Table(name = "employees")
 @Getter
 @Setter
 @AllArgsConstructor

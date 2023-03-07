@@ -19,8 +19,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.userapp.annotation.Log;
 import com.example.userapp.dto.EmployeeDTO;
-import com.example.userapp.model.JwtResponse;
-import com.example.userapp.model.LoginRequest;
+import com.example.userapp.security.JwtResponse;
+import com.example.userapp.security.LoginRequest;
 import com.example.userapp.service.EmployeeService;
 
 /**

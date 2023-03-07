@@ -1,4 +1,4 @@
-package com.example.userapp.model;
+package com.example.userapp.security;
 
 import java.util.List;
 

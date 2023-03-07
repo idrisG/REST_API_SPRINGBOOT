@@ -1,4 +1,4 @@
-package com.example.userapp.config;
+package com.example.userapp.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.userapp.auth.JwtTokenFilter;
-import com.example.userapp.auth.MyBasicAuthenticationEntryPoint;
+import com.example.userapp.security.JwtTokenFilter;
+import com.example.userapp.security.MyBasicAuthenticationEntryPoint;
 import com.example.userapp.service.EmployeeService;
 /**
  * Security configurer for authentication and authorization

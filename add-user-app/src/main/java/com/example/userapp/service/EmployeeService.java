@@ -3,12 +3,8 @@ package com.example.userapp.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -20,12 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.userapp.auth.JwtUtils;
+import com.example.userapp.security.JwtUtils;
 import com.example.userapp.dto.EmployeeDTO;
 import com.example.userapp.mapper.EmployeeMapper;
 import com.example.userapp.model.Employee;
-import com.example.userapp.model.JwtResponse;
-import com.example.userapp.model.LoginRequest;
+import com.example.userapp.security.JwtResponse;
 import com.example.userapp.repository.EmployeeRepository;
 /**
  * EmployeeService used to take action on employeeRepository.

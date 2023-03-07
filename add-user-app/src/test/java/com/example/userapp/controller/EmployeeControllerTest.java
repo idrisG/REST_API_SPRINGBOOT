@@ -11,9 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.userapp.auth.JwtTokenFilter;
-import com.example.userapp.auth.JwtUtils;
-import com.example.userapp.config.CustomSecurityConfigurer;
+import com.example.userapp.security.JwtTokenFilter;
+import com.example.userapp.security.JwtUtils;
+import com.example.userapp.security.CustomSecurityConfigurer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;

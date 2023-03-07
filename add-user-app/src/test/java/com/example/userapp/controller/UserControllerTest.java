@@ -15,11 +15,10 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
-import com.example.userapp.auth.JwtTokenFilter;
-import com.example.userapp.auth.JwtUtils;
-import com.example.userapp.config.CustomSecurityConfigurer;
+import com.example.userapp.security.JwtTokenFilter;
+import com.example.userapp.security.JwtUtils;
+import com.example.userapp.security.CustomSecurityConfigurer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -45,7 +44,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.example.userapp.dto.UserDTO;
 import com.example.userapp.model.Gender;
-import com.example.userapp.model.User;
 import com.example.userapp.service.EmployeeService;
 import com.example.userapp.service.UserService;
 import com.example.userapp.validator.UserValidator;

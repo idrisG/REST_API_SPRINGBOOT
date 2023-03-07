@@ -1,4 +1,4 @@
-package com.example.userapp.auth;
+package com.example.userapp.security;
 
 import java.io.IOException;
 
